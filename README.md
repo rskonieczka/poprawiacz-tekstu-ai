@@ -2,7 +2,7 @@
 
 Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie internetowej za pomoca AI (OpenAI API). Streaming odpowiedzi, korekta ortograficzna, undo, konfigurowalna temperatura i wiele wiecej.
 
-> **Darmowe rozszerzenie (MIT)** - samo narzedzie jest w pełni darmowe i open source.
+> **Darmowe rozszerzenie (MIT)** - samo narzedzie jest w pelni darmowe i open source. [Pobierz ZIP](https://github.com/rskonieczka/poprawiacz-tekstu-ai/archive/refs/heads/main.zip)
 >
 > **Uwaga:** Wtyczka wymaga płatnego klucza API OpenAI. Kazde uzycie (redakcja, korekta) generuje zapytanie do API, co wiaze sie z kosztami naliczanymi przez OpenAI zgodnie z ich cennikiem. Monitoruj zuzycie na [platform.openai.com/usage](https://platform.openai.com/usage).
 
@@ -45,10 +45,11 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 
 ## Instalacja
 
-1. Otworz Chrome i przejdz do `chrome://extensions/`
-2. Wlacz **Tryb dewelopera** (przelacznik w prawym gornym rogu)
-3. Kliknij **Zaladuj rozpakowane**
-4. Wskazz folder `contenet_redaktor`
+1. [Pobierz ZIP](https://github.com/rskonieczka/poprawiacz-tekstu-ai/archive/refs/heads/main.zip) i rozpakuj archiwum
+2. Otworz Chrome i przejdz do `chrome://extensions/`
+3. Wlacz **Tryb dewelopera** (przelacznik w prawym gornym rogu)
+4. Kliknij **Zaladuj rozpakowane**
+5. Wskaz rozpakowany folder `contenet_redaktor`
 
 ## Konfiguracja
 
