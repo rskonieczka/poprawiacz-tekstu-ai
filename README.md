@@ -4,12 +4,12 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 
 > **Darmowe rozszerzenie (MIT)** - samo narzedzie jest w pelni darmowe i open source. [Pobierz ZIP](https://github.com/rskonieczka/poprawiacz-tekstu-ai/archive/refs/heads/main.zip)
 >
-> **Uwaga:** Wtyczka wymaga płatnego klucza API OpenAI. Kazde uzycie (redakcja, korekta) generuje zapytanie do API, co wiaze sie z kosztami naliczanymi przez OpenAI zgodnie z ich cennikiem. Monitoruj zuzycie na [platform.openai.com/usage](https://platform.openai.com/usage).
+> **Uwaga:** Wtyczka wymaga płatnego klucza API OpenAI. Kazde uzycie (redakcja, korekta) generuje zapytanie do API, co wiaze sie z kosztami naliczanymi przez OpenAI zgodnie z ich cennikiem. Monitoruj zuzycie na [platform.openai.com/usage](https://platform.openai.com/usage). Jeśli wybierzesz starszy model to koszt jest znacznie mniejszy.
 
 ## Funkcje
 
 ### Redakcja tekstu
-- **Redakcja zaznaczonego tekstu** - zaznacz tekst, kliknij prawym i wybierz "Redaguj zaznaczony tekst (AI)" lub uzyj skrotu `Ctrl+Shift+R`
+- **Redakcja zaznaczonego tekstu** - zaznacz tekst, kliknij prawym i wybierz "Redaguj zaznaczony tekst (AI)" lub uzyj skrotu `Ctrl+Shift+Y`
 - **Korekta ortograficzna** - checkbox "Popraw tylko bledy ortograficzne i gramatyczne" (bez zmiany tonu/stylu)
 - **Konfiguracja tonu (20 opcji)** - autorytatywny, chłodny, ciepły, cyniczny, emocjonalny, empatyczny, figlarny, formalny, humorystyczny, ironiczny, kliniczny, nieformalny, niepewny, optymistyczny, pesymistyczny, pewny siebie, poważny, przyjazny, sarkastyczny, współczujący
 - **Konfiguracja stylu (19 opcji)** - akademicki, analityczny, informacyjny, konwersacyjny, krytyczny, listowy, metaforyczny, narracja, opisowy, poetycki, pouczający, przekonujący, publicystyczny, rzeczowy, satyryczny, techniczny, twórczy, wyjaśniający, zwięzły
@@ -26,6 +26,10 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 - **Error banner z retry** - bledy wyswietlane jako banner z przyciskiem "Ponow probe"
 - **Badge modelu** - aktualny model widoczny w naglowku modala
 - **Walidacja dlugosci tekstu** - ostrzezenie przy dlugich tekstach, blokada przy >30k tokenow
+
+### Google Docs i podobne aplikacje
+- **Tryb ograniczony** - na stronach takich jak Google Docs, Sheets, Slides automatyczne zaznaczanie i wstawianie tekstu nie dziala (canvas rendering). Skrot klawiszowy i menu kontekstowe moga byc przechwytywane przez aplikacje.
+- **Jak uzywac** - kliknij ikone wtyczki na pasku narzedzi i wybierz **"Otworz redaktor na stronie"**, wklej tekst recznie do pola edycji (Ctrl+V), po redakcji skopiuj wynik i wklej go z powrotem do dokumentu.
 
 ### Konfiguracja (popup)
 - **Klucz API** - z toggle widocznosci i linkiem do platform.openai.com
@@ -62,7 +66,7 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 ## Uzycie
 
 1. Zaznacz tekst na dowolnej stronie
-2. Uzyj `Ctrl+Shift+R` lub kliknij prawym przyciskiem -> **"Redaguj zaznaczony tekst (AI)"**
+2. Uzyj `Ctrl+Shift+Y` lub kliknij prawym przyciskiem -> **"Redaguj zaznaczony tekst (AI)"**
 3. W oknie modalnym dostosuj ton, styl, kontekst i cel (lub zaznacz korekta ortograficzna)
 4. Kliknij **Redaguj**
 5. Po otrzymaniu wyniku kliknij **Wstaw tekst** lub **Kopiuj**
@@ -82,7 +86,7 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 
 | Skrot | Akcja |
 |-------|-------|
-| `Ctrl+Shift+R` (`Cmd+Shift+R` na Mac) | Otworz modal redakcji |
+| `Ctrl+Shift+Y` (`Cmd+Shift+Y` na Mac) | Otworz modal redakcji |
 | `Escape` | Przerwij operacje / zamknij modal |
 
 ## Wymagania

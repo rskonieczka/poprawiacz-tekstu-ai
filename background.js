@@ -4,6 +4,11 @@ chrome.runtime.onInstalled.addListener(() => {
     title: 'Redaguj zaznaczony tekst (AI)',
     contexts: ['selection']
   });
+  chrome.contextMenus.create({
+    id: 'otworz-redaktor',
+    title: 'Otworz Poprawiacz tekstu AI',
+    contexts: ['page', 'editable']
+  });
 });
 
 async function ensureContentScript(tabId) {
@@ -32,12 +37,10 @@ chrome.commands.onCommand.addListener(async (command) => {
         func: () => window.getSelection()?.toString() || ''
       });
       const selectedText = result?.result || '';
-      if (selectedText.trim()) {
-        await chrome.tabs.sendMessage(tab.id, {
-          action: 'open-modal',
-          selectedText: selectedText
-        });
-      }
+      await chrome.tabs.sendMessage(tab.id, {
+        action: 'open-modal',
+        selectedText: selectedText
+      });
     } catch (err) {
       console.error('Poprawiacz tekstu AI (shortcut):', err);
     }
@@ -45,12 +48,12 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId === 'redaguj-ai' && info.selectionText) {
+  if (info.menuItemId === 'redaguj-ai' || info.menuItemId === 'otworz-redaktor') {
     try {
       await ensureContentScript(tab.id);
       await chrome.tabs.sendMessage(tab.id, {
         action: 'open-modal',
-        selectedText: info.selectionText
+        selectedText: info.selectionText || ''
       });
     } catch (err) {
       console.error('Poprawiacz tekstu AI:', err);

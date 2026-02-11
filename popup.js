@@ -98,6 +98,40 @@ testBtn.addEventListener('click', async () => {
   }
 });
 
+document.getElementById('openOnPage').addEventListener('click', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab) return;
+
+  try {
+    await chrome.tabs.sendMessage(tab.id, { action: 'ping' });
+  } catch (e) {
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ['content.js']
+    });
+    await chrome.scripting.insertCSS({
+      target: { tabId: tab.id },
+      files: ['modal.css']
+    });
+  }
+
+  let selectedText = '';
+  try {
+    const [result] = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => window.getSelection()?.toString() || ''
+    });
+    selectedText = result?.result || '';
+  } catch (e) {}
+
+  await chrome.tabs.sendMessage(tab.id, {
+    action: 'open-modal',
+    selectedText: selectedText
+  });
+
+  window.close();
+});
+
 saveBtn.addEventListener('click', () => {
   const settings = {
     apiKey: fields.apiKey.value.trim(),

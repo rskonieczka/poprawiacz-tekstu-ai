@@ -28,8 +28,8 @@
   "commands": {
     "open-redaktor": {
       "suggested_key": {
-        "default": "Ctrl+Shift+R",
-        "mac": "Command+Shift+R"
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
       },
       "description": "Redaguj zaznaczony tekst (AI)"
     }
@@ -38,7 +38,9 @@
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "css": ["modal.css"]
+      "css": ["modal.css"],
+      "all_frames": true,
+      "match_origin_as_fallback": true
     }
   ]
 }

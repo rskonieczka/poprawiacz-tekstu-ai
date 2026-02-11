@@ -52,6 +52,16 @@
     'zwięzły'
   ];
 
+  const RESTRICTED_SITES = [
+    'docs.google.com',
+    'sheets.google.com',
+    'slides.google.com'
+  ];
+
+  function isRestrictedSite() {
+    return RESTRICTED_SITES.some((site) => location.hostname.includes(site));
+  }
+
   let currentSelection = null;
   let modalElement = null;
   let activeAbortController = null;
@@ -227,8 +237,8 @@
         <div class="cr-ai-body">
 
           <div class="cr-ai-field">
-            <label for="cr-ai-source">Zaznaczony tekst</label>
-            <textarea class="cr-ai-source-text" id="cr-ai-source" rows="3">${escapeHtml(selectedText)}</textarea>
+            <label for="cr-ai-source">${selectedText ? 'Zaznaczony tekst' : 'Tekst do redakcji'}</label>
+            <textarea class="cr-ai-source-text" id="cr-ai-source" rows="3" placeholder="${selectedText ? '' : 'Wklej tutaj tekst do redakcji (Ctrl+V)'}">${escapeHtml(selectedText)}</textarea>
           </div>
 
           <div class="cr-ai-field cr-ai-checkbox-field">
@@ -540,9 +550,15 @@
       );
 
       resultArea.value = fullText;
-      modal.querySelector('#cr-ai-replace').style.display = '';
+      if (!isRestrictedSite() && currentSelection) {
+        modal.querySelector('#cr-ai-replace').style.display = '';
+      }
       modal.querySelector('#cr-ai-copy').style.display = '';
-      setStatus(modal, 'Gotowe. Mozesz wstawic zredagowany tekst lub skopiowac go.', 'info');
+      if (isRestrictedSite()) {
+        setStatus(modal, 'Gotowe. Skopiuj zredagowany tekst i wklej go recznie.', 'info');
+      } else {
+        setStatus(modal, 'Gotowe. Mozesz wstawic zredagowany tekst lub skopiowac go.', 'info');
+      }
     } catch (err) {
       if (err.name === 'AbortError') {
         setStatus(modal, 'Przerwano redagowanie.', 'info');
