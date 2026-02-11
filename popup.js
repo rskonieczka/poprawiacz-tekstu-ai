@@ -30,8 +30,8 @@ chrome.storage.sync.get(
     model: 'gpt-4o-mini',
     tempEdit: 0.7,
     tempSpellcheck: 0.2,
-    tone: 'przyjacielski',
-    style: 'informatywny',
+    tone: 'przyjazny',
+    style: 'informacyjny',
     promptTemplate: DEFAULT_PROMPT_TEMPLATE
   },
   (data) => {

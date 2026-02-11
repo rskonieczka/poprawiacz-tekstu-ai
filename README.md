@@ -7,8 +7,8 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 ### Redakcja tekstu
 - **Redakcja zaznaczonego tekstu** - zaznacz tekst, kliknij prawym i wybierz "Redaguj zaznaczony tekst (AI)" lub uzyj skrotu `Ctrl+Shift+R`
 - **Korekta ortograficzna** - checkbox "Popraw tylko bledy ortograficzne i gramatyczne" (bez zmiany tonu/stylu)
-- **Konfiguracja tonu** - przyjacielski, profesjonalny, formalny, nieformalny, entuzjastyczny, neutralny, perswazyjny, empatyczny
-- **Konfiguracja stylu** - informatywny, narracyjny, opisowy, zwiezly, szczegolowy, marketingowy, techniczny, konwersacyjny
+- **Konfiguracja tonu (20 opcji)** - autorytatywny, chłodny, ciepły, cyniczny, emocjonalny, empatyczny, figlarny, formalny, humorystyczny, ironiczny, kliniczny, nieformalny, niepewny, optymistyczny, pesymistyczny, pewny siebie, poważny, przyjazny, sarkastyczny, współczujący
+- **Konfiguracja stylu (19 opcji)** - akademicki, analityczny, informacyjny, konwersacyjny, krytyczny, listowy, metaforyczny, narracja, opisowy, poetycki, pouczający, przekonujący, publicystyczny, rzeczowy, satyryczny, techniczny, twórczy, wyjaśniający, zwięzły
 - **Kontekst i cel** - dodaj kontekst oraz cel redakcji (zapamietywane miedzy sesjami)
 - **Edytowalny szablon promptu** - pelna kontrola nad instrukcja wysylana do AI (z mozliwoscia przywrocenia domyslnego)
 

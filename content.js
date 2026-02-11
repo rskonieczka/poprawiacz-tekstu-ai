@@ -2,31 +2,54 @@
   'use strict';
 
   const DEFAULT_PROMPT_TEMPLATE =
-    'Zredaguj nastepujacy tekst. Ton: {{ton}}. Styl: {{styl}}.{{kontekst}}{{cel}}\n\nTekst do redakcji:\n"""{{tekst}}"""';
+    'W pierwszej kolejności dokonaj głębokiej analizy intencji i celu komunikacji. Następnie zredaguj następujący tekst. Ton: {{ton}}. Styl: {{styl}}.{{kontekst}}{{cel}}\n\nTekst do redakcji:\n"""{{tekst}}"""';
 
   const SPELLCHECK_PROMPT =
     'Popraw WYLACZNIE bledy ortograficzne i gramatyczne w ponizszym tekscie. NIE zmieniaj stylu, tonu, struktury zdan ani doboru slow. Zachowaj oryginalne formatowanie. Zwroc TYLKO poprawiony tekst.\n\nTekst:\n"""{{tekst}}"""';
 
   const TONE_OPTIONS = [
-    'przyjacielski',
-    'profesjonalny',
+    'autorytatywny',
+    'chłodny',
+    'ciepły',
+    'cyniczny',
+    'emocjonalny',
+    'empatyczny',
+    'figlarny',
     'formalny',
+    'humorystyczny',
+    'ironiczny',
+    'kliniczny',
     'nieformalny',
-    'entuzjastyczny',
-    'neutralny',
-    'perswazyjny',
-    'empatyczny'
+    'niepewny',
+    'optymistyczny',
+    'pesymistyczny',
+    'pewny siebie',
+    'poważny',
+    'przyjazny',
+    'sarkastyczny',
+    'współczujący'
   ];
 
   const STYLE_OPTIONS = [
-    'informatywny',
-    'narracyjny',
+    'akademicki',
+    'analityczny',
+    'informacyjny',
+    'konwersacyjny',
+    'krytyczny',
+    'listowy',
+    'metaforyczny',
+    'narracja',
     'opisowy',
-    'zwiezly',
-    'szczegolowy',
-    'marketingowy',
+    'poetycki',
+    'pouczający',
+    'przekonujący',
+    'publicystyczny',
+    'rzeczowy',
+    'satyryczny',
     'techniczny',
-    'konwersacyjny'
+    'twórczy',
+    'wyjaśniający',
+    'zwięzły'
   ];
 
   let currentSelection = null;
@@ -43,10 +66,10 @@
           model: 'gpt-4o-mini',
           tempEdit: 0.7,
           tempSpellcheck: 0.2,
-          tone: 'przyjacielski',
+          tone: 'przyjazny',
           lastContext: '',
           lastGoal: '',
-          style: 'informatywny',
+          style: 'informacyjny',
           promptTemplate: DEFAULT_PROMPT_TEMPLATE
         },
         resolve
@@ -220,13 +243,13 @@
             <div class="cr-ai-field">
               <label for="cr-ai-tone">Ton</label>
               <select id="cr-ai-tone">
-                ${buildSelectOptions(TONE_OPTIONS, 'przyjacielski')}
+                ${buildSelectOptions(TONE_OPTIONS, 'przyjazny')}
               </select>
             </div>
             <div class="cr-ai-field">
               <label for="cr-ai-style">Styl</label>
               <select id="cr-ai-style">
-                ${buildSelectOptions(STYLE_OPTIONS, 'informatywny')}
+                ${buildSelectOptions(STYLE_OPTIONS, 'informacyjny')}
               </select>
             </div>
           </div>
