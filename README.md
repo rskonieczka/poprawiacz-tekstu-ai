@@ -45,7 +45,7 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 
 ## Instalacja
 
-1. [Pobierz ZIP](https://github.com/rskonieczka/poprawiacz-tekstu-ai/archive/refs/heads/main.zip) i rozpakuj archiwum
+1. [Pobierz ZIP](https://github.com/rskonieczka/contenet_redaktor/archive/refs/heads/main.zip) i rozpakuj archiwum
 2. Otworz Chrome i przejdz do `chrome://extensions/`
 3. Wlacz **Tryb dewelopera** (przelacznik w prawym gornym rogu)
 4. Kliknij **Zaladuj rozpakowane**
