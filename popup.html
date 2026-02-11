@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 400px;
+      height: 600px;
+      overflow-y: auto;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    body {
+      padding: 16px;
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .popup-header h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.3px;
+    }
+
+    .popup-logo {
+      width: 28px;
+      height: 28px;
+      background: #6366f1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .field {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #111827;
+      background: #fff;
+      font-family: inherit;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 44px;
+      font-size: 12px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 6px;
+    }
+
+    .btn:hover { background: #4f46e5; }
+
+    .status {
+      text-align: center;
+      font-size: 12px;
+      color: #059669;
+      margin-top: 10px;
+      min-height: 16px;
+    }
+
+    .info {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e7eb;
+      line-height: 1.5;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6366f1;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 10px 0 6px;
+      padding-top: 8px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .api-key-wrap {
+      position: relative;
+    }
+
+    .api-key-wrap input {
+      padding-right: 40px;
+    }
+
+    .toggle-vis {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      color: #9ca3af;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .toggle-vis:hover {
+      color: #6366f1;
+      background: #f3f4f6;
+    }
+
+    .api-hint {
+      font-size: 10px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    .api-hint a {
+      color: #6366f1;
+      text-decoration: none;
+    }
+
+    .api-hint a:hover {
+      text-decoration: underline;
+    }
+
+    .range-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .range-wrap input[type="range"] {
+      flex: 1;
+      padding: 0;
+      border: none;
+      height: auto;
+    }
+
+    .range-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: #6366f1;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: #6366f1;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      padding: 0;
+    }
+
+    .btn-link:hover {
+      color: #4f46e5;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-row .btn {
+      flex: 1;
+    }
+
+    .btn-test {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1.5px solid #d1d5db;
+    }
+
+    .btn-test:hover {
+      background: #e5e7eb;
+    }
+
+    .test-status {
+      text-align: center;
+      font-size: 11px;
+      margin-top: 6px;
+      min-height: 14px;
+    }
+
+    .test-ok { color: #059669; }
+    .test-fail { color: #dc2626; }
+    .test-loading { color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="popup-header">
+    <div class="popup-logo">PT</div>
+    <h1>Poprawiacz tekstu AI</h1>
+  </div>
+
+  <div class="section-title">Konfiguracja API</div>
+
+  <div class="field">
+    <label for="apiKey">Klucz OpenAI API</label>
+    <div class="api-key-wrap">
+      <input type="password" id="apiKey" placeholder="sk-..." />
+      <button class="toggle-vis" id="toggleVis" title="Pokaz/ukryj klucz">&#128065;</button>
+    </div>
+    <div class="api-hint">Pobierz klucz: <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a></div>
+  </div>
+
+  <div class="field">
+    <label for="model">Model</label>
+    <select id="model">
+      <option value="gpt-4o-mini">gpt-4o-mini (szybki, tani)</option>
+      <option value="gpt-4o">gpt-4o (zaawansowany)</option>
+      <option value="gpt-4.1-mini">gpt-4.1-mini (najnowszy szybki)</option>
+      <option value="gpt-4.1">gpt-4.1 (najnowszy zaawansowany)</option>
+    </select>
+  </div>
+
+  <div class="section-title">Temperatura AI</div>
+
+  <div class="row">
+    <div class="field">
+      <label for="tempEdit">Redakcja</label>
+      <div class="range-wrap">
+        <input type="range" id="tempEdit" min="0" max="1" step="0.1" value="0.7" />
+        <span class="range-val" id="tempEditVal">0.7</span>
+      </div>
+    </div>
+    <div class="field">
+      <label for="tempSpellcheck">Korekta ortograficzna</label>
+      <div class="range-wrap">
+        <input type="range" id="tempSpellcheck" min="0" max="1" step="0.1" value="0.2" />
+        <span class="range-val" id="tempSpellcheckVal">0.2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Domyslne ustawienia redakcji</div>
+
+  <div class="row">
+    <div class="field">
+      <label for="tone">Domyslny ton</label>
+      <select id="tone">
+        <option value="przyjacielski">przyjacielski</option>
+        <option value="profesjonalny">profesjonalny</option>
+        <option value="formalny">formalny</option>
+        <option value="nieformalny">nieformalny</option>
+        <option value="entuzjastyczny">entuzjastyczny</option>
+        <option value="neutralny">neutralny</option>
+        <option value="perswazyjny">perswazyjny</option>
+        <option value="empatyczny">empatyczny</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="style">Domyslny styl</label>
+      <select id="style">
+        <option value="informatywny">informatywny</option>
+        <option value="narracyjny">narracyjny</option>
+        <option value="opisowy">opisowy</option>
+        <option value="zwiezly">zwiezly</option>
+        <option value="szczegolowy">szczegolowy</option>
+        <option value="marketingowy">marketingowy</option>
+        <option value="techniczny">techniczny</option>
+        <option value="konwersacyjny">konwersacyjny</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="label-row">
+      <label for="promptTemplate">Szablon promptu</label>
+      <button class="btn-link" id="resetPrompt">Przywroc domyslny</button>
+    </div>
+    <textarea id="promptTemplate" rows="2"></textarea>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn" id="saveBtn">Zapisz ustawienia</button>
+    <button class="btn btn-test" id="testBtn">Testuj klucz</button>
+  </div>
+  <div class="test-status" id="testStatus"></div>
+  <div class="status" id="status"></div>
+
+  <div class="info">
+    Zaznacz tekst na dowolnej stronie, kliknij prawym przyciskiem i wybierz
+    <strong>"Redaguj zaznaczony tekst (AI)"</strong>.
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

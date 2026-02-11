@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Poprawiacz tekstu AI",
+  "version": "1.0.0",
+  "description": "Poprawiaj i redaguj zaznaczony tekst na stronie za pomocą AI (OpenAI). Ustaw ton, styl, kontekst i cel.",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "open-redaktor": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+R",
+        "mac": "Command+Shift+R"
+      },
+      "description": "Redaguj zaznaczony tekst (AI)"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["modal.css"]
+    }
+  ]
+}
