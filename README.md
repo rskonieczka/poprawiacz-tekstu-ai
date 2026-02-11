@@ -2,6 +2,10 @@
 
 Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie internetowej za pomoca AI (OpenAI API). Streaming odpowiedzi, korekta ortograficzna, undo, konfigurowalna temperatura i wiele wiecej.
 
+> **Darmowe rozszerzenie (MIT)** - samo narzedzie jest w pełni darmowe i open source.
+>
+> **Uwaga:** Wtyczka wymaga płatnego klucza API OpenAI. Kazde uzycie (redakcja, korekta) generuje zapytanie do API, co wiaze sie z kosztami naliczanymi przez OpenAI zgodnie z ich cennikiem. Monitoruj zuzycie na [platform.openai.com/usage](https://platform.openai.com/usage).
+
 ## Funkcje
 
 ### Redakcja tekstu
