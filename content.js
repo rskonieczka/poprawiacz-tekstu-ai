@@ -339,10 +339,6 @@
   function bindModalEvents(overlay) {
     const modal = overlay.querySelector('#cr-ai-modal');
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
-    });
-
     modal.querySelector('#cr-ai-close').addEventListener('click', closeModal);
     modal.querySelector('#cr-ai-cancel').addEventListener('click', closeModal);
 
