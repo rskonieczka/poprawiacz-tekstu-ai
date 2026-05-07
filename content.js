@@ -51,7 +51,8 @@
     'techniczny',
     'twórczy',
     'wyjaśniający',
-    'zwięzły'
+    'zwięzły',
+    'ofertowy'
   ];
 
   const RESTRICTED_SITES = [
@@ -96,19 +97,56 @@
   }
 
   function buildPrompt(template, data) {
+    const hasTonePlaceholder = template.includes('{{ton}}');
+    const hasStylePlaceholder = template.includes('{{styl}}');
+
     let prompt = template
       .replace('{{ton}}', data.tone)
       .replace('{{styl}}', data.style)
       .replace('{{tekst}}', data.text);
 
+    const textMarker = '\n\nTekst do redakcji:\n';
+
+    if (data.tone && data.tone.trim() && !hasTonePlaceholder) {
+      const toneInstruction = ' Ton: ' + data.tone.trim() + '.';
+      if (prompt.includes(textMarker)) {
+        prompt = prompt.replace(textMarker, toneInstruction + textMarker);
+      } else {
+        prompt += toneInstruction;
+      }
+    }
+
+    if (data.style && data.style.trim() && !hasStylePlaceholder) {
+      const styleInstruction = ' Styl: ' + data.style.trim() + '.';
+      if (prompt.includes(textMarker)) {
+        prompt = prompt.replace(textMarker, styleInstruction + textMarker);
+      } else {
+        prompt += styleInstruction;
+      }
+    }
+
     if (data.context && data.context.trim()) {
-      prompt = prompt.replace('{{kontekst}}', ' Wez pod uwage: ' + data.context.trim() + '.');
+      const contextInstruction = ' Wez pod uwage: ' + data.context.trim() + '.';
+      if (prompt.includes('{{kontekst}}')) {
+        prompt = prompt.replace('{{kontekst}}', contextInstruction);
+      } else if (prompt.includes(textMarker)) {
+        prompt = prompt.replace(textMarker, contextInstruction + textMarker);
+      } else {
+        prompt += contextInstruction;
+      }
     } else {
       prompt = prompt.replace('{{kontekst}}', '');
     }
 
     if (data.goal && data.goal.trim()) {
-      prompt = prompt.replace('{{cel}}', ' Moj cel to: ' + data.goal.trim() + '.');
+      const goalInstruction = ' Moj cel to: ' + data.goal.trim() + '.';
+      if (prompt.includes('{{cel}}')) {
+        prompt = prompt.replace('{{cel}}', goalInstruction);
+      } else if (prompt.includes(textMarker)) {
+        prompt = prompt.replace(textMarker, goalInstruction + textMarker);
+      } else {
+        prompt += goalInstruction;
+      }
     } else {
       prompt = prompt.replace('{{cel}}', '');
     }

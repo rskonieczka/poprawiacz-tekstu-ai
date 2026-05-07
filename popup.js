@@ -1,5 +1,5 @@
 const DEFAULT_PROMPT_TEMPLATE =
-  'Zredaguj nastepujacy tekst. Ton: {{ton}}. Styl: {{styl}}.{{kontekst}}{{cel}}\n\nTekst do redakcji:\n"""{{tekst}}"""';
+  'Zredaguj następujący tekst. Popraw błędy stylistyczne i gramatyczne. Ton: {{ton}}. Styl: {{styl}}.{{kontekst}}{{cel}}\n\nTekst do redakcji:\n"""{{tekst}}"""';
 
 const CONTENT_SCRIPT_VERSION = '1.0.1';
 
