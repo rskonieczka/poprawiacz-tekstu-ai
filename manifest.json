@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Poprawiacz tekstu AI",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Poprawiaj i redaguj zaznaczony tekst na stronie za pomocą AI (OpenAI). Ustaw ton, styl, kontekst i cel.",
   "permissions": [
     "contextMenus",

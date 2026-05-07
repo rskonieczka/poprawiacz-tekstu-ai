@@ -1,6 +1,12 @@
 const DEFAULT_PROMPT_TEMPLATE =
   'Zredaguj nastepujacy tekst. Ton: {{ton}}. Styl: {{styl}}.{{kontekst}}{{cel}}\n\nTekst do redakcji:\n"""{{tekst}}"""';
 
+const CONTENT_SCRIPT_VERSION = '1.0.1';
+
+function isOutdatedContentScript(response) {
+  return !response || response.version !== CONTENT_SCRIPT_VERSION;
+}
+
 const fields = {
   apiKey: document.getElementById('apiKey'),
   model: document.getElementById('model'),
@@ -103,31 +109,48 @@ document.getElementById('openOnPage').addEventListener('click', async () => {
   if (!tab) return;
 
   try {
-    await chrome.tabs.sendMessage(tab.id, { action: 'ping' });
+    const pingResponse = await chrome.tabs.sendMessage(tab.id, { action: 'ping' }, { frameId: 0 });
+    if (isOutdatedContentScript(pingResponse)) {
+      statusEl.textContent = 'Odswiez karte, aby zaladowac nowa wersje rozszerzenia.';
+      setTimeout(() => { statusEl.textContent = ''; }, 4000);
+      return;
+    }
   } catch (e) {
-    await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ['content.js']
-    });
-    await chrome.scripting.insertCSS({
-      target: { tabId: tab.id },
-      files: ['modal.css']
-    });
+    try {
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id, frameIds: [0] },
+        files: ['content.js']
+      });
+      await chrome.scripting.insertCSS({
+        target: { tabId: tab.id, frameIds: [0] },
+        files: ['modal.css']
+      });
+    } catch (err) {
+      statusEl.textContent = 'Nie mozna otworzyc na tej stronie.';
+      setTimeout(() => { statusEl.textContent = ''; }, 3000);
+      return;
+    }
   }
 
   let selectedText = '';
   try {
     const [result] = await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
+      target: { tabId: tab.id, frameIds: [0] },
       func: () => window.getSelection()?.toString() || ''
     });
     selectedText = result?.result || '';
   } catch (e) {}
 
-  await chrome.tabs.sendMessage(tab.id, {
-    action: 'open-modal',
-    selectedText: selectedText
-  });
+  try {
+    await chrome.tabs.sendMessage(tab.id, {
+      action: 'open-modal',
+      selectedText: selectedText
+    }, { frameId: 0 });
+  } catch (e) {
+    statusEl.textContent = 'Blad komunikacji ze strona. Odswiez strone i sprobuj ponownie.';
+    setTimeout(() => { statusEl.textContent = ''; }, 3000);
+    return;
+  }
 
   window.close();
 });

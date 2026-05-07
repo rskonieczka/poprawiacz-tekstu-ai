@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  const CONTENT_SCRIPT_VERSION = '1.0.1';
+
   const DEFAULT_PROMPT_TEMPLATE =
     'W pierwszej kolejności dokonaj głębokiej analizy intencji i celu komunikacji. Następnie zredaguj następujący tekst. Ton: {{ton}}. Styl: {{styl}}.{{kontekst}}{{cel}}\n\nTekst do redakcji:\n"""{{tekst}}"""';
 
@@ -115,6 +117,8 @@
   }
 
   async function callOpenAIStream(apiKey, model, prompt, temperature, onToken, signal) {
+    const isGpt5Model = model.startsWith('gpt-5');
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -134,8 +138,8 @@
             content: prompt
           }
         ],
-        temperature: temperature,
-        max_tokens: 4096,
+        ...(isGpt5Model ? {} : { temperature: temperature }),
+        [isGpt5Model ? 'max_completion_tokens' : 'max_tokens']: 4096,
         stream: true
       }),
       signal: signal
@@ -668,10 +672,11 @@
 
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.action === 'ping') {
-      sendResponse({ status: 'ok' });
+      sendResponse({ status: 'ok', version: CONTENT_SCRIPT_VERSION });
       return;
     }
-    if (msg.action === 'open-modal' && msg.selectedText) {
+    if (window !== window.top) return;
+    if (msg.action === 'open-modal' && msg.selectedText !== undefined) {
       captureSelection();
       createModal(msg.selectedText);
     }

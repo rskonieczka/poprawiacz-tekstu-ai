@@ -29,12 +29,12 @@ Rozszerzenie Chrome do redagowania zaznaczonego tekstu na dowolnej stronie inter
 
 ### Google Docs i podobne aplikacje
 - **Tryb ograniczony** - na stronach takich jak Google Docs, Sheets, Slides automatyczne zaznaczanie i wstawianie tekstu nie dziala (canvas rendering). Skrot klawiszowy i menu kontekstowe moga byc przechwytywane przez aplikacje.
-- **Jak uzywac** - kliknij ikone wtyczki na pasku narzedzi i wybierz **"Otworz redaktor na stronie"**, wklej tekst recznie do pola edycji (Ctrl+V), po redakcji skopiuj wynik i wklej go z powrotem do dokumentu.
+- **Jak uzywac** - kliknij ikone wtyczki na pasku narzedzi i wybierz **"Otworz okno redakcji**, wklej tekst recznie do pola edycji (Ctrl+V), po redakcji skopiuj wynik i wklej go z powrotem do dokumentu.
 
 ### Konfiguracja (popup)
 - **Klucz API** - z toggle widocznosci i linkiem do platform.openai.com
 - **Testuj klucz** - przycisk walidujacy polaczenie z API
-- **Model** - gpt-4o-mini, gpt-4o, gpt-4.1-mini, gpt-4.1
+- **Model** - gpt-5, gpt-5.4-mini, gpt-5-nano, gpt-4o-mini, gpt-4o, gpt-4.1-mini, gpt-4.1
 - **Temperatura** - osobna dla redakcji (domyslnie 0.7) i korekty ortograficznej (domyslnie 0.2)
 - **Domyslny ton i styl**
 - **Szablon promptu** - z przyciskiem "Przywroc domyslny"

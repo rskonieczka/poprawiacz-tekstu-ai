@@ -11,9 +11,14 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
+const CONTENT_SCRIPT_VERSION = '1.0.1';
+
 async function ensureContentScript(tabId) {
   try {
-    await chrome.tabs.sendMessage(tabId, { action: 'ping' });
+    const response = await chrome.tabs.sendMessage(tabId, { action: 'ping' });
+    if (!response || response.version !== CONTENT_SCRIPT_VERSION) {
+      throw new Error('Outdated content script');
+    }
   } catch (e) {
     await chrome.scripting.executeScript({
       target: { tabId: tabId },
